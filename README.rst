@@ -5,6 +5,7 @@
 A tool to create character sheets for Dungeons and Dragons.
 
 .. image:: https://github.com/ matsavage/dungeon-sheets/workflows/Run%20test%20suite/badge.svg?branch=master
+.. image:: https://github.com/matsavage/dungeon-sheets/workflows/Build%20example%20characters/badge.svg?branch=master
 
 Installation
 ============
