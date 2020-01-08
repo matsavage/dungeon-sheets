@@ -89,8 +89,15 @@ def create_latex_pdf(character, basename, template):
     tex = template.render(character=character)
     # Create tex document
     tex_file = f'{basename}.tex'
-    with open(tex_file, mode='w') as f:
+    with open(tex_file, mode='w', encoding="utf-8") as f:
         f.write(tex)
+        '''for i in tex:
+            try:
+                f.write(i)
+            except Exception as e:
+                print(f'Our exception in {e}', end='\n\n')
+                print(i)
+        '''
         
     # Convenience function for removing temporary files
     def remove_temp_files(basename_):
@@ -519,11 +526,12 @@ load_character_file = _char.read_character_file
 
 def main():
     # Prepare an argument parser
+    runtime_exceptions = 0
     parser = argparse.ArgumentParser(
         description='Prepare Dungeons and Dragons character sheets as PDFs')
     parser.add_argument('filename', type=str, nargs="?",
                         help="Python file with character definition")
-    parser.add_argument('--editable', '-e', action="store_true",
+    parser.add_argument('--editable', '-e', action="store_false",
                         help="Keep the PDF fields in place once processed.")
     parser.add_argument('--debug', '-d', action="store_true",
                         help="Provide verbose logging for debugging purposes.")
@@ -539,7 +547,7 @@ def main():
     for filename in filenames:
         print(f"Processing {os.path.splitext(filename)[0]}...", end='')
         try:
-            make_sheet(character_file=filename, flatten=(not args.editable))
+            make_sheet(character_file=filename, flatten=(args.editable))
         except exceptions.CharacterFileFormatError as e:
             # Only raise the failed exception if this file is explicitly given
             print('invalid')
@@ -547,10 +555,13 @@ def main():
                 raise
         except Exception as e:
             print('failed')
-            raise
+            logging.exception(e)
+            runtime_exceptions += 1
         else:
             print("done")
 
+    if runtime_exceptions > 1:
+        return runtime_exceptions
 
 if __name__ == '__main__':
     main()
