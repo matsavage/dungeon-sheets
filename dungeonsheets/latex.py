@@ -70,6 +70,9 @@ def create_latex_pdf(
         str(tex_file),
     ]
 
+    if "xelatex" in tex_command_line:
+        tex_command_line.append("-output-driver=\"xdvipdfmx -i dvipdfmx-unsafe.cfg -q -E\"")
+
     # Deal with TEXINPUTS and add paths to latex modules
     environment = os.environ
     tex_env = environment.get('TEXINPUTS', '')
