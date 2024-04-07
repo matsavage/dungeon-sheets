@@ -1,16 +1,11 @@
 name: Deploy Docker image
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-      branches: [ master ]
-
-  # workflow_run:
-  #   workflows: ["Python package"]
-  #   branches: [main]
-  #   types: 
-  #     - completed
+  workflow_run:
+    workflows: ["Python package"]
+    # branches: [ "master" ]
+    types: 
+      - completed
 
 
 env:
