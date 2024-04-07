@@ -3,7 +3,6 @@ name: Deploy Docker image
 on:
   workflow_run:
     workflows: ["Python package"]
-    # branches: [ "master" ]
     types: 
       - completed
 
