@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -e /app
 WORKDIR /build
 
 ENTRYPOINT [ "python", "-m", "dungeonsheets.make_sheets" ]
-CMD [ "--fancy", "--tex-template", "--recursive" ]
+CMD [ "--fancy", "--editable", "--recursive" ]
