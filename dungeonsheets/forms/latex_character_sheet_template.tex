@@ -5,8 +5,6 @@
 \usepackage{ifthen}
 \usepackage{pstricks}
 
-\usepackage[UKenglish]{babel}
-
 \usepackage{dndtemplate}
 \usepackage{bookmark}
 
@@ -16,8 +14,7 @@
 % Headline
 \CharacterName{[[ char.name ]]}
 
-% adds only main class and total level to prevent overflow
-\Class{[[ char.primary_class.name ]] [[ char.level ]]} 
+\Class{[[ char.classes_and_levels ]]}
 \Background{[[ char.background ]]}
 \PlayerName{[[ char.player_name ]]}
 \Race{[[ char.race ]]}
@@ -154,7 +151,7 @@
 
 \Inspiration{[% if char.inspiration %] $\star$ [% endif %]}
 \Proficiency{[[ char.proficiency_bonus ]]}
-\Perception{[[ 10 + char.perception.modifier ]]} 
+\Perception{[[ 10 + char.perception.modifier ]]}
 
 \ArmorClass{[[ char.armor_class ]]}
 \Initiative{[[ char.initiative.replace("+", "") ]]}
@@ -187,7 +184,7 @@
 [%- endfor -%]
 }
 
-\Equipment{[[ char.equipment_text| boxed ]]}
+\Equipment{[[ char.equipment_text| boxed -]] \\ \footnotesize{[[ char.weight_and_capacity_text| boxed ]]}}
 
 \PersonalityTraits{[[ char.personality_traits ]]}
 
@@ -212,11 +209,11 @@
 % background
 
 \CharacterAppearance{[[ portrait ]]
-[[ char.appearance_text ]]
+[[- char.appearance_text -]]
 }
 \AdditionalFeaturesAndTraits{[[ char.additional_description ]]}
 
-\Characterbackground{[[ char.backstory ]] }
+\Characterbackground{[[ char.backstory ]]}
 
 \Treasure{[[ char.treasure ]]}
 

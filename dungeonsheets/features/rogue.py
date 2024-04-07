@@ -366,7 +366,7 @@ class SteadyAim(Feature):
     roll on the current turn. You can use this bonus action only if
     you haven't moved during this turn, and after you use the bonus
     action, your speed is 0 until the end of the current turn.
-    
+
     """
     name = "Steady Aim"
     source = "Rogue (3rd level, optional)"
@@ -414,7 +414,7 @@ class EyeForWeakness(Feature):
 # Mastermind
 class MasterOfIntrigue(Feature):
     """When you choose this archetype at 3rd level, you gain proficiency with the
-    disguise kit, the forgery kit, and one gaming set Of your choice. You also
+    disguise kit, the forgery kit, and one gaming set of your choice. You also
     learn two languages of your choice. Additionally, you can unerringly mimic
     the speech patterns and accent of a creature that you hear speak for at
     least 1 minute, enabling you to pass yourself off as a native speaker of a
@@ -445,13 +445,10 @@ class InsightfulManipulator(Feature):
     if the creature is your equal, superior, or inferior in regard to two of
     the following characteristics of your choice:
 
-    • Intelligence score
-
-    • Wisdom score
-
-    • Charisma score
-
-    --Class levels (if any)
+    - Intelligence score
+    - Wisdom score
+    - Charisma score
+    - Class levels (if any)
 
     At the DM's option, you might also realize you know a piece of the
     creature's history or one of its personality traits, if it has any

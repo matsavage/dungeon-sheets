@@ -39,7 +39,7 @@ class PowerfulBuild(Feature):
 
 class Amphibious(Feature):
     """
-    You can breath air and water
+    You can breathe air and water.
 
     """
 
@@ -50,7 +50,7 @@ class Amphibious(Feature):
 # Dwarves
 class DwarvenResilience(Feature):
     """You have advantage on saving throws against poison, and you have resistance
-    against poison damage
+    against poison damage.
 
     """
 
@@ -146,10 +146,21 @@ class DrowMagic(Feature):
     ability for these spells.
 
     """
+    _spells = {1: [spells.DancingLights,], 3: [spells.FaerieFire,], 5: [spells.Darkness,]}
+    spells_known = []
+    spells_prepared = []
+
+    def __init__(self, owner):
+        if owner is not None:
+            level = owner.level
+            for lvl, spl in self._spells.items():
+                if level >= lvl:
+                    self.spells_known.extend(spl)
+                    self.spells_prepared.extend(spl)
+        super().__init__(owner=owner)
 
     name = "Drow Magic"
     source = "Race (Dark Elf)"
-    spells_known = spells_prepared = (spells.DancingLights,)
 
 
 # Halflings
@@ -240,7 +251,7 @@ class BreathWeapon(Feature):
     save, and half as much damage on a successful one. The damage increases to
     3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use
     your breath weapon, you can't use it again until you complete a short or
-    long rest. Damage
+    long rest.
 
     """
 
@@ -250,7 +261,7 @@ class BreathWeapon(Feature):
 
 class DraconicResistance(Feature):
     """You have resistance to the damage type associated with your draconic
-    ancestry. Languages.
+    ancestry.
 
     """
 
@@ -277,13 +288,13 @@ class NaturalIllusionist(Feature):
 
     name = "Natural Illusionist"
     source = "Race (Forest Gnome)"
+    spells_known = spells_prepared = (spells.MinorIllusion,)
 
 
 class SpeakWithSmallBeasts(Feature):
     """Through sounds and gestures, you can communicate simple ideas with Small or
     smaller beasts. Forest gnomes love animals and often keep squirrels,
     badgers, rabbits, moles, woodpeckers, and other creatures as beloved pets.
-
 
     """
 
@@ -295,7 +306,7 @@ class ArtificersLore(Feature):
     """Whenever you make an Intelligence (History) check related to magic items,
     alchemical objects, or technological devices, you can add twice your
     proficiency bonus, instead of any proficiency bonus you normally
-    apply. Tinker.
+    apply.
 
     """
 
@@ -322,7 +333,8 @@ class Tinker(Feature):
     light a candle, torch, or campfire. Using the device requires your action.
 
     *Music Box*: When opened, this music box plays a single song at a moderate
-    volume. The box stops playing when it reaches the song's end or when
+    volume. The box stops playing when it reaches the song's end or when it's
+    closed.
 
     """
 
@@ -373,16 +385,28 @@ class HellishResistance(Feature):
 
 
 class InfernalLegacy(Feature):
-    """You know the thaumaturgy cantrip.  Once you reach 3rd level, you can cast
+    """You know the thaumaturgy cantrip. Once you reach 3rd level, you can cast
     the hellish rebuke spell once per day as a 2nd-level spell. Once you reach
     5th level, you can also cast the darkness spell once per day. Charisma is
     your spellcasting ability for these spells.
 
     """
 
+    _spells = {1: [spells.Thaumaturgy,], 3: [spells.HellishRebuke,]}
+    spells_known = []
+    spells_prepared = []
+
+    def __init__(self, owner):
+        if owner is not None:
+            level = owner.level
+            for lvl, spl in self._spells.items():
+                if level >= lvl:
+                    self.spells_known.extend(spl)
+                    self.spells_prepared.extend(spl)
+        super().__init__(owner=owner)
+
     name = "Infernal Legacy"
     source = "Race (Tiefling)"
-    spells_known = spells_prepared = (spells.Thaumaturgy,)
 
 
 # Aasimar
@@ -412,6 +436,7 @@ class LightBearer(Feature):
 
     name = "Light Bearer"
     source = "Race (Aasimar)"
+    spells_known = spells_prepared = (spells.Light,)
 
 
 class AasimarRadiantSoul(Feature):
@@ -492,6 +517,7 @@ class FirbolgMagic(Feature):
 
     name = "Firbolg Magic"
     source = "Race (Firbolg)"
+    spells_known = spells_prepared = (spells.DetectMagic, spells.DisguiseSelf,)
 
 
 class HiddenStep(Feature):
@@ -638,8 +664,6 @@ class FelineAgility(Feature):
 
 
 # Triton
-
-
 class ControlAirAndWater(Feature):
     """A child of the sea, you can call on the magic of elemental air and
     water. You can cast fog cloud with this trait. Starting at 3rd level, you
@@ -649,6 +673,18 @@ class ControlAirAndWater(Feature):
     rest. Charisma is your spellcasting ability for these spells.
 
     """
+    _spells = {1: [spells.FogCloud,], 3: [spells.GustOfWind,], 5: [spells.WallOfWater,]}
+    spells_known = []
+    spells_prepared = []
+
+    def __init__(self, owner):
+        if owner is not None:
+            level = owner.level
+            for lvl, spl in self._spells.items():
+                if level >= lvl:
+                    self.spells_known.extend(spl)
+                    self.spells_prepared.extend(spl)
+        super().__init__(owner=owner)
 
     name = "Control Air and Water"
     source = "Race (Triton)"
@@ -696,6 +732,7 @@ class MingleWithTheWind(Feature):
 
     name = "Mingle with the Wind"
     source = "Race (Air Genasi)"
+    spells_known = spells_prepared = (spells.Levitate,)
 
 
 class EarthWalk(Feature):
@@ -736,6 +773,18 @@ class ReachToTheBlaze(Feature):
     rest. Constitution is your spellcasting ability for these spells.
 
     """
+    _spells = {1: [spells.ProduceFlame,], 3: [spells.BurningHands,]}
+    spells_known = []
+    spells_prepared = []
+
+    def __init__(self, owner):
+        if owner is not None:
+            level = owner.level
+            for lvl, spl in self._spells.items():
+                if level >= lvl:
+                    self.spells_known.extend(spl)
+                    self.spells_prepared.extend(spl)
+        super().__init__(owner=owner)
 
     name = "Reach to the Blaze"
     source = "Race (Fire Genasi)"
@@ -759,14 +808,24 @@ class CallToTheWave(Feature):
     spells.
 
     """
+    _spells = {1: [spells.ShapeWater,], 3: [spells.CreateOrDestroyWater]}
+    spells_known = []
+    spells_prepared = []
+
+    def __init__(self, owner):
+        if owner is not None:
+            level = owner.level
+            for lvl, spl in self._spells.items():
+                if level >= lvl:
+                    self.spells_known.extend(spl)
+                    self.spells_prepared.extend(spl)
+        super().__init__(owner=owner)
 
     name = "Call to the Wave"
     source = "Race (Water Genasi)"
 
 
 # RFTLW Races
-
-
 class DualMind(Feature):
     """
     You have advantage on all Wisdom saving throws.
@@ -824,8 +883,8 @@ class SeveredFromDreams(Feature):
     source = "Race (Kalashtar)"
 
 
-# monsterous races
-# bugbear
+# Monstrous races
+# Bugbear
 class LongLimbed(Feature):
     """When you make a melee attack on your turn, your reach for it is 5
     feet greater than normal.
@@ -847,7 +906,7 @@ class SupriseAttack(Feature):
     source = "Race (BugBear)"
 
 
-# Goblins
+# Goblin
 class FuryOfTheSmall(Feature):
     """
     When you damage a creature with an attack or a spell and the creature's
@@ -894,7 +953,7 @@ class MartialTraining(Feature):  # you have to add the weapons of choice to your
     source = "Race (HobGoblin)"
 
 
-# kobold
+# Kobold
 class GrovelCowerAndBeg(Feature):
     """As an action on your turn, you can cower pathetically to
     distract nearby foes. Until the end of your next turn, your
@@ -930,7 +989,7 @@ class Aggressive(Feature):
     source = "Race (Orc)"
 
 
-# yuan-ti pureblood
+# Yuan-ti Pureblood
 class InnateSpellcasting(Feature):
     """You know the poison spray cantrip. You can cast animal
     friendship an unlimited number of times with this trait,
@@ -940,6 +999,18 @@ class InnateSpellcasting(Feature):
     your spellcasting ability for these spells.
 
     """
+    _spells = {1: [spells.PoisonSpray, spells.AnimalFriendship,], 3: [spells.Suggestion,]}
+    spells_known = []
+    spells_prepared = []
+
+    def __init__(self, owner):
+        if owner is not None:
+            level = owner.level
+            for lvl, spl in self._spells.items():
+                if level >= lvl:
+                    self.spells_known.extend(spl)
+                    self.spells_prepared.extend(spl)
+        super().__init__(owner=owner)
 
     name = "Innate Spellcasting"
     source = "Race (Yuan-Ti Pureblood)"
